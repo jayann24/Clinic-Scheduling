@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -9,14 +10,14 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
+  final _mobileController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
   bool _isLoading = false;
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _mobileController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -38,42 +39,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   // Logo/Icon Section
                   Container(
-                    height: 80,
-                    width: 80,
-                    margin: const EdgeInsets.only(bottom: 32),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF667eea), Color(0xFF764ba2)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFF667eea).withOpacity(0.3),
-                          blurRadius: 20,
-                          offset: const Offset(0, 10),
-                        ),
-                      ],
-                    ),
-                    child: const Icon(
-                      Icons.person,
-                      color: Colors.white,
-                      size: 40,
+                    height: 120,
+                    margin: const EdgeInsets.only(bottom: 0),
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      fit: BoxFit.contain,
                     ),
                   ),
 
-                  // Welcome Text
-                  const Text(
-                    'Welcome Back',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF2D3748),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 20),
                   Text(
                     'Sign in to your account',
                     style: TextStyle(
@@ -84,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 48),
 
-                  // Email Field
+                  // Mobile Number Field
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -98,13 +72,40 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     child: TextFormField(
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
+                      controller: _mobileController,
+                      keyboardType: TextInputType.phone,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(10),
+                      ],
                       decoration: InputDecoration(
-                        labelText: 'Email',
-                        prefixIcon: Icon(
-                          Icons.email_outlined,
-                          color: Colors.grey[600],
+                        labelText: 'Mobile No.',
+                        prefixIcon: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.phone_outlined,
+                                color: Colors.grey[600],
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                '+63',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey[700],
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(left: 8),
+                                height: 24,
+                                width: 1,
+                                color: Colors.grey[300],
+                              ),
+                            ],
+                          ),
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -120,10 +121,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your email';
+                          return 'Please enter your mobile number';
                         }
-                        if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-                          return 'Please enter a valid email';
+                        if (value.length != 10) {
+                          return 'Mobile number must be 10 digits';
+                        }
+                        if (!value.startsWith('9')) {
+                          return 'Mobile number must start with 9';
                         }
                         return null;
                       },
@@ -195,12 +199,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        // Handle forgot password
+                        Navigator.pushNamed(context, '/reset-password');
                       },
                       child: const Text(
                         'Forgot Password?',
                         style: TextStyle(
-                          color: Color(0xFF667eea),
+                          color: Color(0xff3fa9f5),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -213,37 +217,43 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 56,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+                        colors: [Color(0xff3fa9f5), Color(0xff0d3b66)],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                       ),
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF667eea).withOpacity(0.3),
+                          color: const Color(0xff3fa9f5).withOpacity(0.3),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
                       ],
                     ),
                     child: ElevatedButton(
-                      onPressed: _isLoading ? null : () async {
+                      onPressed: _isLoading
+                          ? null
+                          : () async {
                         if (_formKey.currentState!.validate()) {
                           setState(() {
                             _isLoading = true;
                           });
 
                           // Simulate login process
-                          await Future.delayed(const Duration(seconds: 2));
+                          await Future.delayed(
+                              const Duration(seconds: 2));
 
                           setState(() {
                             _isLoading = false;
                           });
 
+                          Navigator.pushReplacementNamed(context, '/dashboard');
+
                           // Handle login logic here
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Login successful!'),
+                            SnackBar(
+                              content: Text(
+                                  'Login successful with +63${_mobileController.text}'),
                               backgroundColor: Colors.green,
                             ),
                           );
@@ -297,30 +307,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 24),
 
                   // Social Login Buttons
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _socialButton(
-                          icon: Icons.g_mobiledata,
-                          label: 'Google',
-                          onPressed: () {
-                            // Handle Google login
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: _socialButton(
-                          icon: Icons.apple,
-                          label: 'Apple',
-                          onPressed: () {
-                            // Handle Apple login
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 32),
 
                   // Sign Up Link
                   Row(
@@ -335,12 +321,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          // Navigate to sign up
+                          Navigator.pushNamed(context, '/signup');
                         },
                         child: const Text(
                           'Sign Up',
                           style: TextStyle(
-                            color: Color(0xFF667eea),
+                            color: Color(0xff3fa9f5),
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
                           ),
