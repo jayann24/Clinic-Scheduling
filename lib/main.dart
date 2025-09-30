@@ -1,9 +1,9 @@
-import 'package:clinic_scheduling/admin/dashboard.dart';
-import 'package:clinic_scheduling/components/signup_screen.dart';
+import 'package:clinic_scheduling/views/admin/dashboard.dart';
+import 'package:clinic_scheduling/views/components/signup_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:clinic_scheduling/components/login_screen.dart';
-import 'package:clinic_scheduling/components/splash_screen.dart';
-import 'package:clinic_scheduling/components/reset_password_screen.dart';
+import 'package:clinic_scheduling/views/components/login_screen.dart';
+import 'package:clinic_scheduling/views/components/splash_screen.dart';
+import 'package:clinic_scheduling/views/components/reset_password_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -39,9 +39,7 @@ class MyApp extends StatelessWidget {
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
-          iconTheme: IconThemeData(
-            color: Color(0xFF2D3748),
-          ),
+          iconTheme: IconThemeData(color: Color(0xFF2D3748)),
         ),
 
         // Custom text theme
@@ -66,12 +64,8 @@ class MyApp extends StatelessWidget {
             color: Color(0xFF2D3748),
             fontWeight: FontWeight.w600,
           ),
-          bodyLarge: TextStyle(
-            color: Color(0xFF4A5568),
-          ),
-          bodyMedium: TextStyle(
-            color: Color(0xFF4A5568),
-          ),
+          bodyLarge: TextStyle(color: Color(0xFF4A5568)),
+          bodyMedium: TextStyle(color: Color(0xFF4A5568)),
         ),
 
         // Custom elevated button theme
@@ -109,24 +103,15 @@ class MyApp extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(
-              color: Color(0xFF667eea),
-              width: 2,
-            ),
+            borderSide: const BorderSide(color: Color(0xFF667eea), width: 2),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(
-              color: Colors.red,
-              width: 1,
-            ),
+            borderSide: const BorderSide(color: Colors.red, width: 1),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(
-              color: Colors.red,
-              width: 2,
-            ),
+            borderSide: const BorderSide(color: Colors.red, width: 2),
           ),
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 20,
@@ -154,14 +139,11 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => const SignUpScreen(),
         '/reset-password': (context) => const ResetPasswordScreen(),
         '/dashboard': (context) => const AdminDashboard(),
-
       },
 
       // Handle unknown routes - fallback to splash screen
       onUnknownRoute: (settings) {
-        return MaterialPageRoute(
-          builder: (context) => const SplashScreen(),
-        );
+        return MaterialPageRoute(builder: (context) => const SplashScreen());
       },
     );
   }
