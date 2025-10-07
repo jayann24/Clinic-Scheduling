@@ -50,10 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 20),
                   Text(
                     'Sign in to your account',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[600],
-                    ),
+                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 48),
@@ -234,31 +231,36 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: _isLoading
                           ? null
                           : () async {
-                        if (_formKey.currentState!.validate()) {
-                          setState(() {
-                            _isLoading = true;
-                          });
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  _isLoading = true;
+                                });
 
-                          // Simulate login process
-                          await Future.delayed(
-                              const Duration(seconds: 2));
+                                // Simulate login process
+                                await Future.delayed(
+                                  const Duration(seconds: 2),
+                                );
 
-                          setState(() {
-                            _isLoading = false;
-                          });
+                                setState(() {
+                                  _isLoading = false;
+                                });
 
-                          Navigator.pushReplacementNamed(context, '/dashboard');
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  '/dashboard',
+                                );
 
-                          // Handle login logic here
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                  'Login successful with +63${_mobileController.text}'),
-                              backgroundColor: Colors.green,
-                            ),
-                          );
-                        }
-                      },
+                                // Handle login logic here
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Login successful with +63${_mobileController.text}',
+                                    ),
+                                    backgroundColor: Colors.green,
+                                  ),
+                                );
+                              }
+                            },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
@@ -268,21 +270,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       child: _isLoading
                           ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            )
                           : const Text(
-                        'Sign In',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
+                              'Sign In',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
                     ),
                   ),
                   const SizedBox(height: 32),
@@ -314,10 +316,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Text(
                         "Don't have an account? ",
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 16,
-                        ),
+                        style: TextStyle(color: Colors.grey[600], fontSize: 16),
                       ),
                       TextButton(
                         onPressed: () {
@@ -365,11 +364,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       child: TextButton.icon(
         onPressed: onPressed,
-        icon: Icon(
-          icon,
-          color: Colors.grey[700],
-          size: 24,
-        ),
+        icon: Icon(icon, color: Colors.grey[700], size: 24),
         label: Text(
           label,
           style: TextStyle(
