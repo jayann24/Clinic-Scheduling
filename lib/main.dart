@@ -1,4 +1,6 @@
 import 'package:clinic_scheduling/views/components/onboarding_screen.dart';
+import 'package:clinic_scheduling/views/patient/home.dart';
+import 'package:clinic_scheduling/views/patient/information.dart';
 import 'package:flutter/material.dart';
 
 // Views
@@ -30,6 +32,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => const SplashScreen(),
         '/onboarding': (context) => const OnboardingScreen(),
         '/login': (context) => const LoginScreen(),
+        '/information': (context) => const UserInfoFormScreen(),
+        '/patient-home': (context) => const PatientHomeScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/reset-password': (context) => const ResetPasswordScreen(),
         '/dashboard': (context) => const AdminDashboard(),

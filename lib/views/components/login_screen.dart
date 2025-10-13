@@ -247,7 +247,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                 Navigator.pushReplacementNamed(
                                   context,
-                                  '/dashboard',
+                                  '/information',
                                 );
 
                                 // Handle login logic here
