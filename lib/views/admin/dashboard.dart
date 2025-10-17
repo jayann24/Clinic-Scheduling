@@ -121,7 +121,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                           ),
                           const SizedBox(height: 4),
                           const Text(
-                            'Junie Antopina',
+                            'Admin',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 24,
@@ -194,16 +194,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  Expanded(
-                    child: _buildStatCard(
-                      icon: Icons.attach_money,
-                      title: 'Revenue',
-                      value: '\$12,450',
-                      change: '+8%',
-                      isPositive: true,
-                      color: const Color(0xFF10B981),
-                    ),
-                  ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: _buildStatCard(
@@ -608,7 +598,7 @@ class MediSchedDrawer extends StatelessWidget {
                   ),
                   const SizedBox(height: 15),
                   const Text(
-                    'Junie Antopina',
+                    'Admin',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

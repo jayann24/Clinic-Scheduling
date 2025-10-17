@@ -52,7 +52,7 @@ class MediSchedDrawer extends StatelessWidget {
                   const SizedBox(height: 15),
                   // User Name
                   const Text(
-                    'Junie Antopina',
+                    'Admin',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class MediSchedDrawer extends StatelessWidget {
                   const SizedBox(height: 5),
                   // User Email/Role
                   Text(
-                    'junie.antopina@medisched.com',
+                    'admin25@medisched.com',
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.white.withOpacity(0.9),
