@@ -1,4 +1,5 @@
 import 'package:clinic_scheduling/views/components/onboarding_screen.dart';
+import 'package:clinic_scheduling/views/patient/appointment.dart';
 import 'package:clinic_scheduling/views/patient/home.dart';
 import 'package:clinic_scheduling/views/patient/information.dart';
 import 'package:flutter/material.dart';
@@ -29,13 +30,19 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme, // light theme defined in a separate file
       initialRoute: '/',
       routes: {
+        // General Routes
         '/': (context) => const SplashScreen(),
         '/onboarding': (context) => const OnboardingScreen(),
         '/login': (context) => const LoginScreen(),
-        '/information': (context) => const UserInfoFormScreen(),
-        '/patient-home': (context) => const PatientHomeScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/reset-password': (context) => const ResetPasswordScreen(),
+
+        // Patient Routes
+        '/information': (context) => const UserInfoFormScreen(),
+        '/patient-home': (context) => const PatientHomeScreen(),
+        '/appointment': (context) => const AppointmentScreen(),
+
+        // Admin Routes
         '/dashboard': (context) => const AdminDashboard(),
       },
       onUnknownRoute: (settings) =>
