@@ -1,3 +1,4 @@
+import 'package:clinic_scheduling/views/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clinic_scheduling/theme/app_theme.dart';
@@ -65,7 +66,7 @@ class _UserInfoFormScreenState extends State<UserInfoFormScreen> {
                 const SizedBox(height: 32),
 
                 // First Name
-                _buildTextField(
+                CustomTextField(
                   controller: _firstNameController,
                   label: 'First Name',
                   hint: 'Enter your first name',
@@ -125,7 +126,7 @@ class _UserInfoFormScreenState extends State<UserInfoFormScreen> {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    _buildTextField(
+                    CustomTextField(
                       controller: _middleNameController,
                       label: '',
                       hint: _hasMiddleName
@@ -140,7 +141,7 @@ class _UserInfoFormScreenState extends State<UserInfoFormScreen> {
                 const SizedBox(height: 20),
 
                 // Last Name
-                _buildTextField(
+                CustomTextField(
                   controller: _lastNameController,
                   label: 'Last Name',
                   hint: 'Enter your last name',
@@ -155,12 +156,12 @@ class _UserInfoFormScreenState extends State<UserInfoFormScreen> {
                 const SizedBox(height: 20),
 
                 // Address
-                _buildTextField(
+                CustomTextField(
                   controller: _addressController,
                   label: 'Address',
                   hint: 'Enter your complete address',
                   icon: Icons.location_on_outlined,
-                  maxLines: 3,
+                  maxLines: 1,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your address';
@@ -168,10 +169,11 @@ class _UserInfoFormScreenState extends State<UserInfoFormScreen> {
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 20),
 
                 // Phone
-                _buildTextField(
+                CustomTextField(
                   controller: _phoneController,
                   label: 'Phone Number',
                   hint: 'Enter your phone number',
@@ -221,90 +223,6 @@ class _UserInfoFormScreenState extends State<UserInfoFormScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    required String hint,
-    required IconData icon,
-    String? Function(String?)? validator,
-    TextInputType? keyboardType,
-    List<TextInputFormatter>? inputFormatters,
-    int maxLines = 1,
-    bool enabled = true,
-    bool showLabel = true,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (showLabel && label.isNotEmpty) ...[
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textPrimary,
-            ),
-          ),
-          const SizedBox(height: 8),
-        ],
-        TextFormField(
-          controller: controller,
-          enabled: enabled,
-          keyboardType: keyboardType,
-          inputFormatters: inputFormatters,
-          maxLines: maxLines,
-          validator: enabled ? validator : null,
-          style: TextStyle(
-            fontSize: 16,
-            color: enabled ? AppColors.textPrimary : AppColors.textSecondary,
-          ),
-          decoration: InputDecoration(
-            hintText: hint,
-            hintStyle: TextStyle(
-              color: AppColors.textSecondary.withOpacity(0.5),
-            ),
-            prefixIcon: Icon(
-              icon,
-              color: enabled
-                  ? AppColors.secondary
-                  : AppColors.textSecondary.withOpacity(0.5),
-            ),
-            filled: true,
-            fillColor: enabled ? Colors.white : Colors.grey.shade100,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.shade200, width: 1),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: AppColors.secondary, width: 2),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.red, width: 1),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.red, width: 2),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 16,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
